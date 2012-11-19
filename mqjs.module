@@ -1,0 +1,39 @@
+<?php
+
+function mqjs_init() {
+  
+}
+
+function mqjs_get_current_layout() {
+  $return = 'normal';
+  if(isset($_COOKIE['mqjs_layout'])) {
+    $return =  $_COOKIE['mqjs_layout'];
+  }elseif(module_exists('browscap')) {
+    $browser = browscap_get_browser();
+    if(isset($browser['ismobile']) && $browser['ismobile']){
+      $return = 'mobile';
+    }
+  }
+
+  return $return;
+
+}
+
+function mqjs_get_layouts() {
+  return array(
+    'mobile' => 'mobile',
+    'narrow' => 'narrow',
+    'normal' => 'normal',
+    'not-mobile' => 'not-mobile'
+  );
+}
+
+function mqjs_preprocess_page(&$vars) {
+   $settings = array(
+      'mqjs' => array(
+        'current_layout' => mqjs_get_current_layout()
+      )
+    );
+
+    drupal_add_js($settings, array('type' => 'setting'));
+}

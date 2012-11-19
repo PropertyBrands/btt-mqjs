@@ -1,0 +1,9 @@
+name = BTM MediaQuery JS
+description = Some extra responsive stuff
+package = BTM
+version = 1.x
+core = 7.x
+files[] = mqjs.module
+
+scripts[] = 'js/mqjs.js'
+scripts[] = 'js/jquery.cookie.js'
